@@ -1,0 +1,110 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
+ */
+package programming.project.pkg2.pkg4.correct.cash.project;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+
+/**
+ *
+ * @author gnorris2027
+ */
+public class ProgrammingProject24CorrectCashProject extends JFrame {
+
+    private JTextField inputField;
+    private JTextArea resultArea;
+
+    public ProgrammingProject24CorrectCashProject() {
+        // Window setup
+        setTitle("Correct Cash Calculator");
+        setSize(380, 350);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(new FlowLayout(FlowLayout.CENTER, 10, 15));
+
+        // Input controls
+        add(new JLabel("Enter change amount: $"));
+        inputField = new JTextField(10);
+        add(inputField);
+
+        JButton calculateButton = new JButton("Calculate");
+        add(calculateButton);
+
+        // Result display box
+        resultArea = new JTextArea(11, 28);
+        resultArea.setEditable(false);
+        resultArea.setFont(new Font("Monospaced", Font.PLAIN, 12));
+        add(new JScrollPane(resultArea));
+
+        // Button action listener
+        calculateButton.addActionListener((ActionEvent e) -> calculateChange());
+
+        // Center window on screen
+        setLocationRelativeTo(null);
+    }
+
+    private void calculateChange() {
+        try {
+            double changeInput = Double.parseDouble(inputField.getText());
+
+            // Converts dollars to total cents
+            int cents = (int) (changeInput * 100 + 0.5);
+
+            // Calculates ten dollar bills and update remaining balance ($10.00 = 1000 cents)
+            int tens = cents / 1000;
+            cents = cents % 1000;
+
+            // Calculates five dollar bills and update remaining balance ($5.00 = 500 cents)
+            int fives = cents / 500;
+            cents = cents % 500;
+
+            // Calculates one dollar bills and update remaining balance ($1.00 = 100 cents)
+            int ones = cents / 100;
+            cents = cents % 100;
+
+            // Calculates quarters and update remaining balance ($0.25 = 25 cents)
+            int quarters = cents / 25;
+            cents = cents % 25;
+
+            // Calculates dimes and update remaining balance ($0.10 = 10 cents)
+            int dimes = cents / 10;
+            cents = cents % 10;
+
+            // Calculates nickels and update remaining balance ($0.05 = 5 cents)
+            int nickels = cents / 5;
+            cents = cents % 5;
+
+            // Remaining amount represents Pennies ($0.01 = 1 cent)
+            int pennies = cents;
+
+            // Format results into GUI text area
+            String result = String.format(
+                "Change breakdown for $%.2f:\n" +
+                "%d Ten Dollar Bills\n" +
+                "%d Five Dollar Bill\n" +
+                "%d One Dollar Bills\n" +
+                "%d Quarters\n" +
+                "%d Dimes\n" +
+                "%d Nickels\n" +
+                "%d Pennies",
+                changeInput, tens, fives, ones, quarters, dimes, nickels, pennies
+            );
+
+            resultArea.setText(result);
+
+        } catch (NumberFormatException ex) {
+            resultArea.setText("Error: Please enter a valid number.\nExample: 18.68");
+        }
+    }
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            new ProgrammingProject24CorrectCashProject().setVisible(true);
+        });
+    }
+}
