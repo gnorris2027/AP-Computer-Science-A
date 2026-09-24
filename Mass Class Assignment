@@ -1,0 +1,87 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
+ */
+package mathclassassignment;
+
+import java.util.Random;
+
+/**
+ *
+ * @author gnorris2027
+ */
+public class MathClassAssignment {
+
+    /**
+     * Custom method to round double values to a specified number of decimal places.
+     * 
+     * @param value The value to round
+     * @param places The number of decimal places
+     * @return The rounded value
+     */
+    public static double roundAvoid(double value, int places) {
+        double scale = Math.pow(10, places);
+        return Math.round(value * scale) / scale;
+    }
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        Random rand = new Random();
+
+// Part 1
+        int angle = rand.nextInt(91);
+        double radians = Math.toRadians(angle);
+        double sine = roundAvoid(Math.sin(radians), 3);
+        double cosine = roundAvoid(Math.cos(radians), 3);
+        double tangent = roundAvoid(Math.tan(radians), 3);
+
+        System.out.printf("Number: %d Sine: %.3f Cosine: %.3f Tangent: %.3f%n%n", angle, sine, cosine, tangent);
+
+// Part 2
+        double radius = 1.0 + (rand.nextDouble() * 19.0);
+        double circleArea = roundAvoid(Math.PI * Math.pow(radius, 2), 3);
+        double sphereVolume = roundAvoid((4.0 / 3.0) * Math.PI * Math.pow(radius, 3), 3);
+
+        System.out.printf("Radius: %.3f%n", roundAvoid(radius, 3));
+        System.out.printf("Circle Area: %.3f%n", circleArea);
+        System.out.printf("Sphere Volume: %.3f%n%n", sphereVolume);
+
+// Part 3
+        double minEnergy = 100_000_000.0;
+        double maxEnergy = 100_000_000_000.0;
+        double largeNumber = minEnergy + (rand.nextDouble() * (maxEnergy - minEnergy));
+
+        double sqrtVal = roundAvoid(Math.sqrt(largeNumber), 5);
+        double naturalLog = roundAvoid(Math.log(largeNumber), 5);
+        double log10Val = roundAvoid(Math.log10(largeNumber), 5);
+
+        System.out.printf("Large Number: %.5f%n", roundAvoid(largeNumber, 5));
+        System.out.printf("Square Root: %.5f%n", sqrtVal);
+        System.out.printf("Natural Logarithm: %.5f%n", naturalLog);
+        System.out.printf("Log10: %.5f%n%n", log10Val);
+
+// Part 4
+        double speedOfLight = 299_792_458.0; // m/s
+        double massGrams = (largeNumber / Math.pow(speedOfLight, 2)) * 1000.0;
+        int massDecimals = rand.nextInt(7) + 2; 
+
+        double roundedMass = roundAvoid(massGrams, massDecimals);
+        System.out.println("Random decimal places chosen for Mass: " + massDecimals);
+        System.out.printf("Mass required: %." + massDecimals + "f grams%n%n", roundedMass);
+
+// Part 5
+        double base = roundAvoid(1.0 + (rand.nextDouble() * 49.0), 2); 
+        int exponent = rand.nextInt(10) + 1; 
+        int powerDecimals = rand.nextInt(6) + 1; 
+
+        double powerResult = Math.pow(base, exponent);
+        double roundedPower = roundAvoid(powerResult, powerDecimals);
+
+        System.out.println("Random Base: " + base);
+        System.out.println("Random Exponent: " + exponent);
+        System.out.println("Random Decimal Places: " + powerDecimals);
+        System.out.printf("%.2f raised to power %d = %." + powerDecimals + "f%n", base, exponent, roundedPower);
+    }
+}
