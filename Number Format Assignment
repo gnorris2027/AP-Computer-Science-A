@@ -1,0 +1,117 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
+ */
+package number.format.assignment;
+
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.text.NumberFormat;
+import java.util.Locale;
+import java.util.Random;
+import java.util.Scanner;
+
+/**
+ *
+ * @author gnorris2027
+ */
+public class NumberFormatAssignment {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        // Create Scanner object to read user input from console
+        Scanner scanner = new Scanner(System.in);
+
+ // Task 1 - Number of students at a school
+        System.out.println("TASK 1: Gender Percentages");
+        
+        // Prompt user for total students and girls count
+        System.out.print("Enter total number of students: ");
+        
+        int totalStudents = scanner.nextInt();
+        System.out.print("Enter total number of girls: ");
+        int girls = scanner.nextInt();
+        
+        // Calculate number of boys and decimal percentages
+        int boys = totalStudents - girls;
+        double percentGirls = (double) girls / totalStudents;
+        double percentBoys = (double) boys / totalStudents;
+
+        // Set up percentage formatter up to 2 decimal places
+        NumberFormat percentFormatter = NumberFormat.getPercentInstance();
+        percentFormatter.setMaximumFractionDigits(2);
+
+        // Output formatted percentages
+        System.out.println("Percentage of girls: " + percentFormatter.format(percentGirls));
+        System.out.println("Percentage of boys:  " + percentFormatter.format(percentBoys));
+        System.out.println();
+
+// Task 2 - Total amount of money in dollars and cents
+        System.out.println("TASK 2: Currency Conversion");
+        
+        // Get USD amount from user
+        System.out.print("Enter total amount in USD (e.g., 100.50): ");
+        double usdAmount = scanner.nextDouble();
+        
+        // Fixed exchange rates
+        double gbpRate = 0.75;
+        double eurRate = 0.86;
+        
+        // Convert USD to GBP and EUR
+        double gbpAmount = usdAmount * gbpRate;
+        double eurAmount = usdAmount * eurRate;
+
+        // Format numbers strictly using UK and German regional locale settings, 
+        // using standard number formatting to avoid non-ASCII currency symbol corruption
+        NumberFormat ukNumberFormat = NumberFormat.getNumberInstance(Locale.UK);
+        ukNumberFormat.setMinimumFractionDigits(2);
+        ukNumberFormat.setMaximumFractionDigits(2);
+
+        NumberFormat euroNumberFormat = NumberFormat.getNumberInstance(Locale.GERMANY);
+        euroNumberFormat.setMinimumFractionDigits(2);
+        euroNumberFormat.setMaximumFractionDigits(2);
+
+        // Display converted values using plain text currency identifiers
+        System.out.println("At an exchange rate of 0.75 GBP to $1, total GBP is: " + ukNumberFormat.format(gbpAmount) + " GBP");
+        System.out.println("At an exchange rate of 0.86 EUR to $1, total EUR is: " + euroNumberFormat.format(eurAmount) + " EUR");
+        System.out.println();
+
+// Task 3 - Integer input
+        System.out.println("TASK 3: Format Pi");
+        System.out.print("Enter an integer from 0 to 15: ");
+        int decimalPlaces = scanner.nextInt();
+        
+        // Validate input range and print Pi formatted to chosen precision
+        if (decimalPlaces >= 0 && decimalPlaces <= 15) {
+            System.out.printf("Pi formatted to %d decimal places: %." + decimalPlaces + "f%n", decimalPlaces, Math.PI);
+        } else {
+            System.out.println("Invalid input. Precision must be between 0 and 15.");
+        }
+        System.out.println();
+
+ // Task 4 - Generate random number
+        System.out.println("TASK 4: Large Random Decimal Number");
+        
+        // Define range boundaries using BigInteger
+        BigInteger min = new BigInteger("100000000"); 
+        BigInteger max = new BigInteger("999000000000000000000");
+        
+        BigInteger range = max.subtract(min);
+        Random random = new Random();
+        BigInteger randomBigInt;
+        
+        // Generate a random BigInteger within the range [0, range]
+        do {
+            randomBigInt = new BigInteger(max.bitLength(), random);
+        } while (randomBigInt.compareTo(range) > 0);
+        
+        // Shift random number into [min, max] range
+        BigInteger resultInteger = randomBigInt.add(min);
+        BigDecimal largeDecimal = new BigDecimal(resultInteger);
+        System.out.println("Generated Random Number: " + largeDecimal.toPlainString());
+        
+        scanner.close();
+    }
+}
