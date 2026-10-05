@@ -1,0 +1,69 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
+ */
+package enumerated.type.and.wrapper.pkgclass.assignment;
+
+import java.util.Scanner;
+
+/**
+ *
+ * @author gnorris2027
+ */
+public class EnumeratedTypeAndWrapperClassAssignment {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        
+    enum Day { Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday }
+    enum Month { January, February, March, April, May, June, July, August, September, October, November, December }
+        
+// Part 1a: Days of the Week
+        System.out.println("Part 1a: Days of the Week");
+        
+        Day day1 = Day.Sunday;
+        Day day2 = Day.Monday;
+        Day day3 = Day.Tuesday;
+        Day day4 = Day.Wednesday;
+        Day day5 = Day.Thursday;
+        Day day6 = Day.Friday;
+        Day day7 = Day.Saturday;
+
+        System.out.println(day1 + " ordinal (1-7): " + (day1.ordinal() + 1));
+        System.out.println(day2 + " ordinal (1-7): " + (day2.ordinal() + 1));
+        System.out.println(day3 + " ordinal (1-7): " + (day3.ordinal() + 1));
+        System.out.println(day4 + " ordinal (1-7): " + (day4.ordinal() + 1));
+        System.out.println(day5 + " ordinal (1-7): " + (day5.ordinal() + 1));
+        System.out.println(day6 + " ordinal (1-7): " + (day6.ordinal() + 1));
+        System.out.println(day7 + " ordinal (1-7): " + (day7.ordinal() + 1));
+
+        System.out.println();
+
+// Part 1b: Months of the Year
+        System.out.println("Part 1b: Months of the Year");
+        
+        for (Month month : Month.values()) {
+            System.out.println(month + " month number: " + (month.ordinal() + 1));
+        }
+
+        System.out.println();
+
+// Part 2: CCHS Username
+        System.out.println("Part 2: CCHS Username");
+        try (Scanner scan = new Scanner(System.in)) {
+            System.out.print("Enter your CCHS username: ");
+            String username = scan.nextLine().trim();
+            
+            String yearString = username.substring(username.length() - 4);
+            int gradYear = Integer.parseInt(yearString);
+            int nextYear = gradYear + 1;
+            String binaryYear = Integer.toBinaryString(gradYear);
+            
+            System.out.println("Graduation year: " + gradYear);
+            System.out.println("The year after graduation will be: " + nextYear);
+            System.out.println("In computer language, you graduate in: " + binaryYear);
+        }
+    }
+}
