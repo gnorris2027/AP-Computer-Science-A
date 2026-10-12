@@ -1,0 +1,90 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
+ */
+package anatomy.of.a.pkgclass.assignment;
+
+/**
+ *
+ * @author gnorris2027
+ */
+public class AnatomyOfAClassAssignment {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        
+ // 1. A class is a blank blueprint, while an object is the actual thing built from that blueprint.
+ // 2. The computer automatically turns the object into a text description and prints it on the screen.
+ // 3. A variable in a method only works inside that specific block of code, while a variable in a class works everywhere inside the whole class.
+ 
+// 4. Program Project
+        Car baseCar = new Car();
+        System.out.println("Base Car:");
+        System.out.println(baseCar);
+        System.out.println();
+
+        Car vwBug = new Car("VW Bug", 60, 85.0, 36000.0);
+        Car toyotaPrius = new Car("Toyota Prius", 220, 118.0, 287550.0);
+        Car bmwI8 = new Car("BMW i8", 369, 155.0, 40000.0);
+        Car teslaModel3 = new Car("Tesla Model 3", 528, 163.0, 38630.0);
+
+        System.out.println("Car List:");
+        System.out.println(vwBug);
+        System.out.println(toyotaPrius);
+        System.out.println(bmwI8);
+        System.out.println(teslaModel3);
+    }
+}
+
+class Car {
+    private String carBrand;
+    private int enginePower;
+    private double maxSpeed;
+    private double price;
+
+    public Car() {
+        carBrand = "Generic Brand";
+        enginePower = 100;
+        maxSpeed = 100.0;
+        price = 15000.0;
+    }
+
+    public Car(String brand, int power, double speed, double cost) {
+        carBrand = brand;
+        enginePower = power;
+        maxSpeed = speed;
+        price = cost;
+    }
+
+    public void setCarBrand(String brand) {
+        carBrand = brand;
+    }
+    public void setEnginePower(int power) {
+        enginePower = power;
+    }
+    public void setMaxSpeed(double speed) {
+        maxSpeed = speed;
+    }
+    public void setPrice(double cost) {
+        price = cost;
+    }
+    public String getCarBrand() {
+        return carBrand;
+    }
+    public int getEnginePower() {
+        return enginePower;
+    }
+    public double getMaxSpeed() {
+        return maxSpeed;
+    }
+    public double getPrice() {
+        return price;
+    }
+
+    @Override
+    public String toString() {
+        return "Brand: " + carBrand + ", Engine Power: " + enginePower + " HP, Max Speed: " + maxSpeed + " MPH, Price: $" + price;
+    }
+}
