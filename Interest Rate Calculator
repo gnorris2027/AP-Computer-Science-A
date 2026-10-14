@@ -1,0 +1,68 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
+ */
+package interest.rate.calculator;
+
+import java.text.NumberFormat;
+import java.util.Locale;
+import java.util.Scanner;
+
+/**
+ *
+ * @author gnorris2027
+ */
+public class InterestRateCalculator {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        NumberFormat currency = NumberFormat.getCurrencyInstance(Locale.US);
+        NumberFormat percent = NumberFormat.getPercentInstance(Locale.US);
+        percent.setMinimumFractionDigits(1);
+
+        System.out.println("Interest Rate Calculator");
+        System.out.println("Interest Rate: " + percent.format(RateCalculatorEngine.RATE));
+
+        System.out.print("Enter Amount: $");
+        double amount = scanner.nextDouble();
+        System.out.print("Enter Months: ");
+        int months = scanner.nextInt();
+        
+        RateCalculatorEngine engine = new RateCalculatorEngine();
+        engine.calculateRepayment(amount, months);
+        engine.printResults(currency);
+
+        scanner.close();
+    }
+}
+
+class RateCalculatorEngine {
+
+    public static final double RATE = 0.035;
+    private double monthlyBase;
+    private double monthlyInterest;
+    private double monthlyPayment;
+    private double totalRepaid;
+
+    public void calculateRepayment(double amount, int months) {
+        if (months > 0) {
+            divideAmountByMonths(amount, months);
+            monthlyInterest = (amount * RATE) / months;
+            monthlyPayment = monthlyBase + monthlyInterest;
+            totalRepaid = monthlyPayment * months;
+        }
+    }
+
+    private void divideAmountByMonths(double amount, int months) {
+        monthlyBase = amount / months;
+    }
+
+    public void printResults(NumberFormat currency) {
+        System.out.println("\nResults");
+        System.out.println("Monthly Payment: " + currency.format(monthlyPayment));
+        System.out.println("Total Repaid: " + currency.format(totalRepaid));
+    }
+}
