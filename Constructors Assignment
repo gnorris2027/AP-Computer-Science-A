@@ -1,0 +1,87 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
+ */
+package constructors.assignment;
+
+/**
+ *
+ * @author gnorris2027
+ */
+public class ConstructorsAssignment {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        Course course1 = new Course("Physics", "AP Physics 1", 100, "Ms. Rafie");
+        Course course2 = new Course("Calculus");
+        
+        course2.setCourseCode("AP Calculus AB");
+        course2.setPointsTotal(100);
+        course2.setInstructorName("Dr. Paye");
+
+        System.out.println("Course Title: " + course2.getCourseTitle());
+        System.out.println("Course Code: " + course2.getCourseCode());
+        System.out.println();
+
+        Course course3 = new Course("English", "AP Literature", 100, "Ms. Carlson");
+        System.out.println(course1);
+        System.out.println();
+        System.out.println(course2);
+        System.out.println();
+        System.out.println(course3);
+    }
+}
+
+class Course {
+    private String courseTitle;
+    private String courseCode;
+    private int pointsTotal;
+    private String instructorName;
+
+    public Course(String title, String code, int points, String instructor) {
+        courseTitle = title;
+        courseCode = code;
+        pointsTotal = points;
+        instructorName = instructor;
+    }
+
+    public Course(String title) {
+        courseTitle = title;
+        courseCode = "TBD";
+        pointsTotal = 0;
+        instructorName = "Unassigned";
+    }
+    public String getCourseTitle() {
+        return courseTitle;
+    }
+    public String getCourseCode() {
+        return courseCode;
+    }
+    public int getPointsTotal() {
+        return pointsTotal;
+    }
+    public String getInstructorName() {
+        return instructorName;
+    }
+    public void setCourseTitle(String title) {
+        courseTitle = title;
+    }
+    public void setCourseCode(String code) {
+        courseCode = code;
+    }
+    public void setPointsTotal(int points) {
+        pointsTotal = points;
+    }
+    public void setInstructorName(String instructor) {
+        instructorName = instructor;
+    }
+    @Override
+    public String toString() {
+        return "Course Title: " + courseTitle + "\n" +
+               "Course Code: " + courseCode + "\n" +
+               "Total Points: " + pointsTotal + "\n" +
+               "Instructor Name: " + instructorName;
+    }
+}
