@@ -17,12 +17,19 @@ public class InterestRateCalculator {
     /**
      * @param args the command line arguments
      */
+
+// Public Method
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+
+// Sets up currency formatter for U.S. dollars
         NumberFormat currency = NumberFormat.getCurrencyInstance(Locale.US);
+
+// Sets up percentage formatter 
         NumberFormat percent = NumberFormat.getPercentInstance(Locale.US);
         percent.setMinimumFractionDigits(1);
 
+// Displays welcome banner and the current interest rate
         System.out.println("Interest Rate Calculator");
         System.out.println("Interest Rate: " + percent.format(RateCalculatorEngine.RATE));
 
@@ -49,13 +56,22 @@ class RateCalculatorEngine {
 
     public void calculateRepayment(double amount, int months) {
         if (months > 0) {
+
+// Used to split amount evenly across months
             divideAmountByMonths(amount, months);
+
+// Calculates monthly interest portion
             monthlyInterest = (amount * RATE) / months;
+
+// Combines base monthly and monthly interest
             monthlyPayment = monthlyBase + monthlyInterest;
+
+// Calculates total cost of the loan
             totalRepaid = monthlyPayment * months;
         }
     }
 
+// Private Method
     private void divideAmountByMonths(double amount, int months) {
         monthlyBase = amount / months;
     }
