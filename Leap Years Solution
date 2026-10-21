@@ -1,0 +1,53 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
+ */
+package leap.years.solution;
+
+import java.util.Scanner;
+
+/**
+ *
+ * @author gnorris2027
+ */
+public class LeapYearsSolution {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+// Creates Scan
+        Scanner scan = new Scanner(System.in);
+        boolean isLeapYear = false;
+        
+        System.out.println("Enter a year:");
+        final int MIN_YEAR = 1582;
+        int year = scan.nextInt();
+        
+        System.out.println("You entered: " + year);
+        
+        if (year < MIN_YEAR) {
+            System.out.println("Error: Year must be 1582 or later (Gregorian calendar adoption year)");
+        } else {
+// Determines if the year is a leap year
+            if (year % 4 == 0) {
+                if (year % 100 == 0) {
+                    if (year % 400 == 0) {
+                        isLeapYear = true;
+                    }
+                } else {
+                    isLeapYear = true;
+                }
+            }
+// Output the result
+            if (isLeapYear) {
+                System.out.println(year + " is a leap year (February has 29 days)");
+            } else {
+                System.out.println(year + " is not a leap year");
+            }
+        }
+        
+        scan.close();
+    }
+    
+}
