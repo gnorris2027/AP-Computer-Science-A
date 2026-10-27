@@ -1,0 +1,150 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
+ */
+package conditionals.assignment;
+
+import java.util.Scanner;
+
+/**
+ *
+ * @author gnorris2027
+ */
+public class ConditionalsAssignment {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+// Stores items with specified prices
+        Item tshirt = new Item();
+        tshirt.setStrName("T Shirt");
+        tshirt.setPrice(29.99);
+
+        Item shoes = new Item();
+        shoes.setStrName("Shoes");
+        shoes.setPrice(125.99);
+
+        Item jeans = new Item();
+        jeans.setStrName("Jeans");
+        jeans.setPrice(60.99);
+
+        Item jacket = new Item();
+        jacket.setStrName("Jacket");
+        jacket.setPrice(250.00);
+
+        Item hat = new Item();
+        hat.setStrName("Hat");
+        hat.setPrice(25.99);
+
+        Item shorts = new Item();
+        shorts.setStrName("Shorts");
+        shorts.setPrice(75.99);
+
+        Item blouse = new Item();
+        blouse.setStrName("Blouse");
+        blouse.setPrice(88.99);
+
+        System.out.println("\n");
+        final double MAX_BUDGET = 250.00;
+        double totalSpent = 0.0;
+        int itemCount = 0;
+
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Available items:");
+        System.out.println(tshirt);
+        System.out.println(shoes);
+        System.out.println(jeans);
+        System.out.println(jacket);
+        System.out.println(hat);
+        System.out.println(shorts);
+        System.out.println(blouse);
+        System.out.println("Budget Limit: $" + MAX_BUDGET);
+
+        while (true) {
+            System.out.print("\nEnter item name to buy (or type 'exit' to quit): ");
+            String input = scanner.nextLine().trim();
+
+            if (input.equalsIgnoreCase("exit")) {
+                break;
+            }
+
+            Item selectedItem = null;
+
+            if (input.equalsIgnoreCase("T Shirt")) {
+                selectedItem = tshirt;
+            } else if (input.equalsIgnoreCase("Shoes")) {
+                selectedItem = shoes;
+            } else if (input.equalsIgnoreCase("Jeans")) {
+                selectedItem = jeans;
+            } else if (input.equalsIgnoreCase("Jacket")) {
+                selectedItem = jacket;
+            } else if (input.equalsIgnoreCase("Hat")) {
+                selectedItem = hat;
+            } else if (input.equalsIgnoreCase("Shorts")) {
+                selectedItem = shorts;
+            } else if (input.equalsIgnoreCase("Blouse")) {
+                selectedItem = blouse;
+            } else {
+                System.out.println("Item not found in store.");
+                continue;
+            }
+
+// Checks budget constraints
+            if (totalSpent + selectedItem.getPrice() > MAX_BUDGET) {
+                System.out.printf("WARNING: Adding %s ($%.2f) exceeds your budget limit of $%.2f!\n",
+                        selectedItem.getStrName(), selectedItem.getPrice(), MAX_BUDGET);
+                System.out.printf("Current spent: $%.2f | Remaining budget: $%.2f\n", 
+                        totalSpent, (MAX_BUDGET - totalSpent));
+            } else {
+                totalSpent += selectedItem.getPrice();
+                itemCount++;
+                System.out.printf("Added %s ($%.2f) to cart.\n", selectedItem.getStrName(), selectedItem.getPrice());
+                System.out.printf("Items bought so far: %d | Total spent: $%.2f\n", itemCount, totalSpent);
+            }
+        }
+
+        scanner.close();
+    }
+}
+
+class Item {
+    private String strName;
+    private double dblPrice = 0.0;
+    public final double TOLERANCE = 0.01;
+
+    public Item() {
+        this.strName = "";
+        this.dblPrice = 0.0;
+    }
+
+    public String getStrName() {
+        return strName;
+    }
+
+    public void setStrName(String strName) {
+        this.strName = strName;
+    }
+
+    public double getPrice() {
+        return dblPrice;
+    }
+
+    public void setPrice(double inPrice) {
+        dblPrice = inPrice;
+    }
+
+    public boolean equals(Item inItem) {
+        if (Math.abs(inItem.dblPrice - this.dblPrice) > TOLERANCE) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "Item: " + strName + ", Price: " + dblPrice;
+    }
+}
