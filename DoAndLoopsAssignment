@@ -1,0 +1,82 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
+ */
+package doandforloops.assignment;
+
+/**
+ *
+ * @author gnorris2027
+ */
+public class DoAndForLoopsAssignment {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        final int MAX_ROWS = 10;
+
+// Part A
+        System.out.println("a.");
+        for (int row = MAX_ROWS; row >= 1; row--) {
+            for (int star = 1; star <= row; star++) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+
+        System.out.println();
+
+// Part B
+        System.out.println("b.");
+        for (int row = 1; row <= MAX_ROWS; row++) {
+            for (int space = 10; space <= MAX_ROWS - row; space++) {
+                System.out.print(" ");
+            }
+            for (int star = 1; star <= row; star++) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+
+        System.out.println();
+
+// Part C
+        System.out.println("c.");
+        for (int row = MAX_ROWS; row >= 1; row--) {
+            for (int space = 1; space <= MAX_ROWS - row; space++) {
+                System.out.print(" ");
+            }
+            for (int star = 1; star <= row; star++) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+
+        System.out.println();
+
+// Part D
+        System.out.println("d.");
+        int halfRows = MAX_ROWS / 2;
+
+        for (int row = 1; row <= halfRows; row++) {
+            for (int space = 1; space <= halfRows - row; space++) {
+                System.out.print(" ");
+            }
+            for (int star = 1; star <= (2 * row - 1); star++) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+
+        for (int row = halfRows; row >= 1; row--) {
+            for (int space = 1; space <= halfRows - row; space++) {
+                System.out.print(" ");
+            }
+            for (int star = 1; star <= (2 * row - 1); star++) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+    }
+}
