@@ -30,7 +30,7 @@ public class DoAndForLoopsAssignment {
 // Part B
         System.out.println("b.");
         for (int row = 1; row <= MAX_ROWS; row++) {
-            for (int space = 10; space <= MAX_ROWS - row; space++) {
+            for (int space = 1; space <= MAX_ROWS - row; space++) {
                 System.out.print(" ");
             }
             for (int star = 1; star <= row; star++) {
