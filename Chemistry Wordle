@@ -1,0 +1,130 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ */
+
+package com.mycompany.ap_cs_a_semester_1_final_project;
+
+import java.util.ArrayList;
+import java.util.Random;
+import java.util.Scanner;
+
+/**
+ *
+ * @author gnorris2027
+ */
+public class AP_CS_A_Semester_1_Final_Project {
+
+    public static void main(String[] args) {
+        String[] wordBank = {
+            "BARIUM", "CESIUM", "COBALT", "COPPER", "CURIUM", "ERBIUM",
+            "HELIUM", "IODINE", "NICKEL", "RADIUM", "SILVER", "SODIUM",
+            "SULFUR", "BEAKER", "ANIONS", "CATION", "ATOMIC", "BINARY",
+            "BONDED", "BUFFER", "CARBON", "CHARGE", "DILUTE", "DIPOLE",
+            "ENERGY", "ENZYME", "FUSION", "ISOMER", "LIQUID", "MATTER",
+            "METALS", "METRIC", "PROTON", "OXIDES", "OXYGEN", "PHENOL",
+            "PHOTON", "PLASMA", "SALINE", "SOLIDS", "SOLUTE", "ABSORB",
+            "FILTER", "IGNITE", "IONIZE", "REDUCE", "REFLUX"
+        };
+
+        Random random = new Random();
+        String targetWord = wordBank[random.nextInt(wordBank.length)];
+
+        Scanner scanner = new Scanner(System.in);
+        int maxAttempts = 6;
+        boolean hasWon = false;
+
+        System.out.println("Chemistry Wordle");
+        System.out.println("You have " + maxAttempts + " tries to guess a 6-letter chemistry word.");
+        System.out.println("[A] = Correct letter in the right spot");
+        System.out.println("(A) = Correct letter in the wrong spot");
+        System.out.println("A = Not in the word");
+        System.out.println();
+
+        InputChecker checker = new InputChecker();
+        WordleBoard board = new WordleBoard();
+
+        int attempts = 0;
+        while (attempts < maxAttempts && !hasWon) {
+            System.out.print("\nGuess " + (attempts + 1) + " of " + maxAttempts + ": ");
+            String guess = scanner.nextLine().trim().toUpperCase();
+
+            if (!checker.isValid(guess)) {
+                continue;
+            }
+
+            String resultRow = board.checkGuess(guess, targetWord);
+            board.addRow(resultRow);
+            attempts++;
+
+            board.printBoard();
+
+            if (guess.equals(targetWord)) {
+                hasWon = true;
+                System.out.println("\nYou got it! The word was " + targetWord + ".");
+            }
+        }
+
+        if (!hasWon) {
+            System.out.println("\nYou ran out of tries. The word was " + targetWord + ".");
+        }
+
+        scanner.close();
+    }
+}
+
+class InputChecker {
+
+    public boolean isValid(String guess) {
+        if (guess.length() != 6) {
+            System.out.println("Must be 6 letters!");
+            return false;
+        }
+        for (int i = 0; i < guess.length(); i++) {
+            char ch = guess.charAt(i);
+            if (ch < 'A' || ch > 'Z') {
+                System.out.println("Letters only, no numbers or spaces!");
+                return false;
+            }
+        }
+
+        return true;
+    }
+}
+
+class WordleBoard {
+
+    private ArrayList<String> rows;
+
+    public WordleBoard() {
+        rows = new ArrayList<String>();
+    }
+
+    public void addRow(String row) {
+        rows.add(row);
+    }
+
+    public String checkGuess(String guess, String targetWord) {
+        String line = "";
+
+        for (int i = 0; i < 6; i++) {
+            char c = guess.charAt(i);
+
+            if (c == targetWord.charAt(i)) {
+                line += "[" + c + "] ";
+            } else if (targetWord.indexOf(c) != -1) {
+                line += "(" + c + ") ";
+            } else {
+                line += " " + c + "  "; 
+            }
+        }
+
+        return line;
+    }
+
+    public void printBoard() {
+        System.out.println();
+        for (int i = 0; i < rows.size(); i++) {
+            System.out.println(rows.get(i));
+        }
+    }
+}
