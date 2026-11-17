@@ -42,7 +42,7 @@ public class AP_CS_A_Semester_1_Final_Project {
 
 // Display the game title, objective, and symbol key so that the user knows how to play
             System.out.println("\nChemistry Wordle");
-            System.out.println("You have " + maxAttempts + " tries to guess a 6-letter chemistry related word.");
+            System.out.println("You have " + maxAttempts + " tries to guess a 6-letter chemistry related word");
             System.out.println("[A] = Correct letter in the right spot");
             System.out.println("(A) = Correct letter in the wrong spot");
             System.out.println("A = Not in the word");
